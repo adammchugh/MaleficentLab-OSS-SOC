@@ -27,3 +27,14 @@ cd /opt/
 for I in $(find Cortex-Analyzers -name 'requirements.txt'); do sudo -H pip install -r $I; done
 for I in $(find Cortex-Analyzers -name 'requirements.txt'); do sudo -H pip3 install -r $I; done
 
+read -p 'Define ES address: ' esaddress
+sed -i 's/uri = "http://127.0.0.1:9200"/uri = "http://$esaddress:9200"/g' /etc/cortex/application.conf
+
+sed -i 's/"https://dl.bintray.com/thehive-project/cortexneurons/analyzers.json"/"/opt/Cortex-Analyzers/analyzers/"/g' /etc/cortex/application.conf
+sed -i 's/"https://dl.bintray.com/thehive-project/cortexneurons/responders.json"/"/opt/Cortex-Analyzers/responders/"/g' /etc/cortex/application.conf
+
+SECRETKEY=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+sed -i 's/#play.http.secret.key="***CHANGEME***"/play.http.secret.key="$SECRETKEY"/g' /etc/cortex/application.conf
+
+sudo systemctl enable cortex
+sudo systemctl start cortex && sudo systemctl status cortex
