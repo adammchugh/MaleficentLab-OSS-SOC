@@ -10,5 +10,4 @@ echo "deb https://d3g5vo6xdbdb9a.cloudfront.net/apt stable main" | sudo tee -a  
 sudo apt-get update -y
 sudo apt install opendistroforelasticsearch-kibana -y
 
-read -p 'Define Elasticsearch host: ' eshost
-sed -i 's/https://localhost:9200/https://$eshost:9200/g' /etc/kibana/kibana.yml
+echo "Installation complete. Please update /etc/kibana/kibana.yml prior to putting into production"
