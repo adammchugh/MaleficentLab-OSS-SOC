@@ -31,3 +31,8 @@ sed -i 's/#network.host: 192.168.0.1/network.host: 0.0.0.0/g' /etc/elasticsearch
 echo "Update /etc/elasticsearch/elasticsearch.yml if this node is to be used within a cluster.\n"
 echo "Uncomment and update discovery.seed_hosts: to include each node within the cluster.\n"
 echo "Uncomment and update cluster.initial_master_nodes: to include which node is considered a master. \n"
+
+sudo systemctl status elasticsearch
+sudo systemctl enable elasticsearch
+
+echo "Elasticsearch Service has been enabled. Recommend rebooting prior to be being placed into service.\n"
