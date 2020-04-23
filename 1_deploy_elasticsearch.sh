@@ -14,16 +14,16 @@ sudo apt install opendistroforelasticsearch -y
 
 read -p 'Define cluster name: ' clustername
 sed -i 's/#cluster.name/cluster.name/g' /etc/elasticsearch/elasticsearch.yml
-sed -i 's/: my-application/: elastic-cluster/g' /etc/elasticsearch/elasticsearch.yml
+sed -i 's/: my-application/: $clustername/g' /etc/elasticsearch/elasticsearch.yml
 
 read -p 'Define node name: ' nodename
 sed -i 's/#node.name:/node.name:/g' /etc/elasticsearch/elasticsearch.yml
-sed -i 's/: node-1/: node-name/g' /etc/elasticsearch/elasticsearch.yml
+sed -i 's/: node-1/: $nodename/g' /etc/elasticsearch/elasticsearch.yml
 
 echo "\nCurrent addresses available on host: \n"
 ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'
 read -p 'Define network address: ' networkhost
-sed -i 's/#network.host: 192.168.0.1/network.host: 0.0.0.0/g' /etc/elasticsearch/elasticsearch.yml
+sed -i 's/#network.host: 192.168.0.1/network.host: $networkhost/g' /etc/elasticsearch/elasticsearch.yml
 
 # sed -i 's/#discovery.seed_hosts: ["host1", "host2"]/discovery.seed_hosts: ["127.0.0.1", "127.0.0.1"]/g' /etc/elasticsearch/elasticsearch.yml
 # sed -i 's/#cluster.initial_master_nodes: ["node-1", "node-2"]/cluster.initial_master_nodes: ["127.0.0.1", "127.0.0.1"]/g' /etc/elasticsearch/elasticsearch.yml
