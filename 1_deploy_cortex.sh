@@ -12,6 +12,12 @@ echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | sudo tee 
 sudo apt install apt-transport-https -y
 sudo apt update -y && sudo apt install elasticsearch -y
 
+sed -i '#cluster.name: my-application/cluster.name: cortex/g' /etc/elasticsearch/elasticsearch.yml
+sed -i '#node.name: node-1/node.name: node-1/g' /etc/elasticsearch/elasticsearch.yml
+sed -i '#network.host: 192.168.0.1/network.host: 0.0.0.0/g' /etc/elasticsearch/elasticsearch.yml
+
+sudo systemctl enable elasticsearch && sudo systemctl start elasticsearch
+
 echo 'deb https://dl.bintray.com/thehive-project/debian-stable any main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
 sudo apt-key adv --keyserver hkp://pgp.mit.edu --recv-key 562CBC1C
 curl https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY | sudo apt-key add -
@@ -36,5 +42,4 @@ sed -i 's/"https://dl.bintray.com/thehive-project/cortexneurons/responders.json"
 SECRETKEY=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 sed -i 's/#play.http.secret.key="***CHANGEME***"/play.http.secret.key="$SECRETKEY"/g' /etc/cortex/application.conf
 
-sudo systemctl enable cortex
-sudo systemctl start cortex && sudo systemctl status cortex
+sudo systemctl enable cortex && sudo systemctl start cortex && sudo systemctl status cortex
