@@ -16,3 +16,6 @@ sudo systemctl status wazuh-api
 
 echo "wazuh-manager hold" | sudo dpkg --set-selections
 echo "wazuh-api hold" | sudo dpkg --set-selections
+
+wget -O filebeat-oss-7.6.2-amd64.deb https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-oss-7.6.2-amd64.deb
+sudo dpkg -i filebeat-oss-7.6.2-amd64.deb
