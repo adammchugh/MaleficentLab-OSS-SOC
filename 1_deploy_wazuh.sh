@@ -1861,3 +1861,4 @@ echo "    cd /usr/share/kibana/ && sudo -u kibana bin/kibana-plugin install http
 echo "    systemctl daemon-reload \n"
 echo "    systemctl enable kibana.service \n"
 echo "    systemctl start kibana.service\n"
+echo "NOTE: Take care to ensure the trailing 7.6.2 in the kibana plugin line matches your Kibana version. If you are running 7.6.1 then please replace 7.6.2 with 7.6.1\n"
