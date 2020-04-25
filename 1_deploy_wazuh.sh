@@ -1848,3 +1848,16 @@ sudo cat << EOF > /etc/filebeat/wazuh-template.json
 EOF
 
 curl -s https://packages.wazuh.com/3.x/filebeat/wazuh-filebeat-0.1.tar.gz | sudo tar -xvz -C /usr/share/filebeat/module
+
+echo "Wazuh installation is now complete. Update /etc/filebeat/filebeat.yml to reflect your OpenDistro Elastic nodes.\n"
+echo "Run the following when filebeat.yml has been updated: \n"
+echo "    cd /etc/filebeat && sudo /usr/share/filebeat/bin/filebeat setup --index-management -E setup.template.json.enabled=false \n"
+echo "    systemctl daemon-reload \n"
+echo "    systemctl enable filebeat.service \n"
+echo "    systemctl start filebeat.service\n"
+
+echo "Complete the following on your Kibana node:\n"
+echo "    cd /usr/share/kibana/ && sudo -u kibana bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.12.2_7.6.2.zip\n"
+echo "    systemctl daemon-reload \n"
+echo "    systemctl enable kibana.service \n"
+echo "    systemctl start kibana.service\n"
