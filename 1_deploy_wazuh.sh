@@ -35,11 +35,10 @@ setup.template.json.name: 'wazuh'
 setup.template.overwrite: true
 setup.ilm.enabled: false
 
-output.elasticsearch
-    hosts: ['http://YOUR_ELASTIC_SERVER_IP:9200']
-    username: admin
-    password: admin
-    ssl.verification_mode: none
+output.elasticsearch.hosts: ['http://YOUR_ELASTIC_SERVER_IP:9200']
+output.elasticsearch.username: admin
+output.elasticsearch.password: admin
+output.elasticsearch.ssl.verification_mode: none
 EOF
 
 sudo cat << EOF > /etc/filebeat/wazuh-template.json
