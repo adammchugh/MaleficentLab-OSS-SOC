@@ -13,4 +13,4 @@ sudo apt install wazuh-agent -y
 
 read -p 'Wuzah Manager IP: ' wazuhmanagerip
 
-sudo sed -i "s/MANAGER_IP/new-text/$wazuhmanagerip" /var/ossec/etc/ossec.conf
+sudo sed -i "s/MANAGER_IP/$wazuhmanagerip/g" /var/ossec/etc/ossec.conf
