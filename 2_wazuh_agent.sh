@@ -2,6 +2,7 @@
 
 apt remove wazuh-agent -y
 apt-get remove --purge wazuh-agent
+rm -fr /etc/apt/sources.list.d/wazuh.list
 
 sudo apt-get install curl apt-transport-https lsb-release gnupg2 -y
 curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | sudo apt-key add -
@@ -10,6 +11,7 @@ apt-get update -y
 
 WAZUH_MANAGER_IP="172.16.0.124"
 apt-get install wazuh-agent -y
+sed -i "s/^MANAGER_IP/172.16.0.124/" /etc/apt/sources.list.d/wazuh.list
 
 sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
 apt-get update
