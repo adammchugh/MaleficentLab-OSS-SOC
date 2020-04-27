@@ -17,3 +17,6 @@ sudo sed -i "s/MANAGER_IP/$wazuhmanagerip/g" /var/ossec/etc/ossec.conf
 sudo chmod -x /var/ossec/etc/ossec.conf
 
 sudo /var/ossec/bin/agent-auth -m $wazuhmanagerip
+
+sudo systemctl start wazuh-agent
+sudo systemctl enable wazuh-agent
