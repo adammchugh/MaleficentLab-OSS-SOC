@@ -12,7 +12,7 @@ echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | sudo tee 
 sudo apt install apt-transport-https -y
 sudo apt update -y && sudo apt install elasticsearch -y
 
-echo 'deb https://dl.bintray.com/thehive-project/debian-stable any main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
+echo 'deb https://dl.bintray.com/thehive-project/debian-beta any main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
 sudo apt-key adv --keyserver hkp://pgp.mit.edu --recv-key 562CBC1C
 curl https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY | sudo apt-key add -
 sudo apt-get update -y && sudo apt install cortex -y
