@@ -1,5 +1,9 @@
 #!/bin/bash
 
+echo "Choose new hostname:"
+read HOSTNAME
+sudo hostnamectl set-hostname $HOSTNAME
+
 echo "Choose mode of Elasticnode:"
 echo "(1) Single-node"
 echo "(2) Master-node"
@@ -81,3 +85,5 @@ case $NODETYPE in
 esac
 
 echo "Installation of Open Distro Elasticsearch is complete."
+
+sudo reboot now
