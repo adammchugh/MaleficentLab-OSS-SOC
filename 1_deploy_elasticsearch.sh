@@ -1,5 +1,45 @@
 #!/bin/bash
 
+echo "Choose mode of Elasticnode:"
+echo "(1) Single-node"
+echo "(2) Master-node"
+echo "(3) Co-ordination Node"
+echo "(4) Data Node"
+echo "(5) Ingest Node"
+read NODETYPE
+
+case $NODETYPE in
+  1)
+    echo "Configuring for Single-node"
+    ;;
+  2)
+    echo "Configuring for Master Node"
+    echo -n "Set Cluster-Name: "
+    read CLUSTERNAME
+    ;;
+  3)
+    echo "Configuring for Co-ordination Node"
+    echo -n "Set Cluster-Name: "
+    read CLUSTERNAME
+    ;;
+  4)
+    echo "Configuring for Data Node"
+    echo -n "Set Cluster-Name: "
+    read CLUSTERNAME
+    ;;
+  5)
+    echo "Configuring for Ingest Node"
+    echo -n "Set Cluster-Name: "
+    read CLUSTERNAME
+    ;;
+  *)
+    echo "Option unknown"
+    exit
+    ;;
+esac
+
+echo "Deploying Elasticsearch. Node Type: $NODETYPE"
+
 sudo add-apt-repository ppa:openjdk-r/ppa
 sudo apt update -y
 apt install apt-transport-https -y
@@ -12,6 +52,32 @@ sudo dpkg -i elasticsearch-oss-7.7.0-amd64.deb
 sudo apt-get update -y
 sudo apt install opendistroforelasticsearch -y
 
-echo "Update /etc/elasticsearch/elasticsearch.yml if this node is to be used within a cluster.\n"
-echo "Uncomment and update discovery.seed_hosts: to include each node within the cluster.\n"
-echo "Uncomment and update cluster.initial_master_nodes: to include which node is considered a master. \n"
+case $NODETYPE in
+  1)
+    # sudo sh -c 'echo cluster.name: $CLUSTERNAME >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c 'network.host: [_local_] >> /etc/elasticsearch/elasticsearch.yml'
+    ;;
+  2)
+    sudo sh -c 'echo cluster.name: $CLUSTERNAME >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c 'echo network.host: [_site_] >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c 'discovery.seed_hosts: ["<private IP of odfe-d1>", "<private IP of odfe-d2>", "<private IP of odfe-c1>"] >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c '# node.attr.zone: zoneIdentifier >> /etc/elasticsearch/elasticsearch.yml'
+    ;;
+  3)
+    sudo sh -c 'echo cluster.name: $CLUSTERNAME >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c 'echo network.host: [_site_] >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c '# node.attr.zone: zoneIdentifier >> /etc/elasticsearch/elasticsearch.yml'
+    ;;
+  4)
+    sudo sh -c 'echo cluster.name: $CLUSTERNAME >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c 'echo network.host: [_site_] >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c '# node.attr.zone: zoneIdentifier >> /etc/elasticsearch/elasticsearch.yml'
+    ;;
+  5)
+    sudo sh -c 'echo cluster.name: $CLUSTERNAME >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c 'echo network.host: [_site_] >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c '# node.attr.zone: zoneIdentifier >> /etc/elasticsearch/elasticsearch.yml'
+    ;;
+esac
+
+echo "Installation of Open Distro Elasticsearch is complete."
