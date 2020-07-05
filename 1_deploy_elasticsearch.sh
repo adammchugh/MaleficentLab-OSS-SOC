@@ -1,8 +1,5 @@
 #!/bin/bash
-
-echo "Choose new hostname:"
-read HOSTNAME
-sudo hostnamectl set-hostname $HOSTNAME
+sudo apt update -y && sudo apt upgrade -y
 
 HOST_NAME=`hostname`
 
