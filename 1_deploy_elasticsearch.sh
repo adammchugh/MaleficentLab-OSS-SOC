@@ -4,6 +4,8 @@ echo "Choose new hostname:"
 read HOSTNAME
 sudo hostnamectl set-hostname $HOSTNAME
 
+HOST_NAME=`hostname`
+
 echo "Choose mode of Elasticnode:"
 echo "(1) Single-node"
 echo "(2) Master-node"
@@ -63,24 +65,39 @@ case $NODETYPE in
     ;;
   2)
     sudo sh -c 'echo cluster.name: $CLUSTERNAME >> /etc/elasticsearch/elasticsearch.yml'
-    sudo sh -c 'echo network.host: [_site_] >> /etc/elasticsearch/elasticsearch.yml'
-    sudo sh -c 'discovery.seed_hosts: ["<private IP of odfe-d1>", "<private IP of odfe-d2>", "<private IP of odfe-c1>"] >> /etc/elasticsearch/elasticsearch.yml'
-    sudo sh -c '# node.attr.zone: zoneIdentifier >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c 'echo node.name: $HOST_NAME >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c 'echo network.host: 0.0.0.0 >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c 'echo node.master: true >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c 'echo node.data: false >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c 'echo node.ingest: false >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c 'echo discovery.seed_hosts: ["<private IP of odfe-d1>", "<private IP of odfe-d2>", "<private IP of odfe-c1>"] >> /etc/elasticsearch/elasticsearch.yml'
     ;;
   3)
     sudo sh -c 'echo cluster.name: $CLUSTERNAME >> /etc/elasticsearch/elasticsearch.yml'
-    sudo sh -c 'echo network.host: [_site_] >> /etc/elasticsearch/elasticsearch.yml'
-    sudo sh -c '# node.attr.zone: zoneIdentifier >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c 'echo node.name: $HOST_NAME >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c 'echo network.host: 0.0.0.0 >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c 'echo node.master: false >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c 'echo node.data: false >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c 'echo node.ingest: false >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c 'echo discovery.seed_hosts: ["<private IP of odfe-d1>", "<private IP of odfe-d2>", "<private IP of odfe-c1>"] >> /etc/elasticsearch/elasticsearch.yml'
     ;;
   4)
     sudo sh -c 'echo cluster.name: $CLUSTERNAME >> /etc/elasticsearch/elasticsearch.yml'
-    sudo sh -c 'echo network.host: [_site_] >> /etc/elasticsearch/elasticsearch.yml'
-    sudo sh -c '# node.attr.zone: zoneIdentifier >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c 'echo node.name: $HOST_NAME >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c 'echo network.host: 0.0.0.0 >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c 'echo node.master: false >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c 'echo node.data: true >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c 'echo node.ingest: false >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c 'echo discovery.seed_hosts: ["<private IP of odfe-d1>", "<private IP of odfe-d2>", "<private IP of odfe-c1>"] >> /etc/elasticsearch/elasticsearch.yml'
     ;;
   5)
     sudo sh -c 'echo cluster.name: $CLUSTERNAME >> /etc/elasticsearch/elasticsearch.yml'
-    sudo sh -c 'echo network.host: [_site_] >> /etc/elasticsearch/elasticsearch.yml'
-    sudo sh -c '# node.attr.zone: zoneIdentifier >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c 'echo node.name: $HOST_NAME >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c 'echo network.host: 0.0.0.0 >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c 'echo node.master: false >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c 'echo node.data: false >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c 'echo node.ingest: true >> /etc/elasticsearch/elasticsearch.yml'
+    sudo sh -c 'echo discovery.seed_hosts: ["<private IP of odfe-d1>", "<private IP of odfe-d2>", "<private IP of odfe-c1>"] >> /etc/elasticsearch/elasticsearch.yml'
     ;;
 esac
 
