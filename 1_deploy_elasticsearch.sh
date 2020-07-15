@@ -100,4 +100,3 @@ esac
 
 echo "Installation of Open Distro Elasticsearch is complete."
 
-sudo reboot now
