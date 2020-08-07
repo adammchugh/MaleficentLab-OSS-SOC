@@ -12,6 +12,8 @@ echo "deb http://www.apache.org/dist/cassandra/debian 311x main" | sudo tee -a /
 sudo apt update -y
 sudo apt install cassandra -y
 
+sleep 10
+
 sudo cqlsh localhost 9042 -e "UPDATE system.local SET cluster_name = 'thp' where key='local';"
 
 sudo nodetool flush
