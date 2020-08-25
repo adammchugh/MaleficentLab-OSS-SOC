@@ -22,8 +22,8 @@ sudo certbot certonly -d $misphostname --server https://acme-v02.api.letsencrypt
 sudo cp /etc/ssl/private/misp.local.crt old.misp.local.crt
 sudo cp /etc/ssl/private/misp.local.key old.misp.local.key
 
-sudo cp /etc/letsencrypt/live/misp.example.com/privkey.pem /etc/ssl/private/misp.local.key
-sudo cp /etc/letsencrypt/live/misp.example.com/cert.pem /etc/ssl/private/misp.local.crt
+sudo cp /etc/letsencrypt/live/$misphostname/privkey.pem /etc/ssl/private/misp.local.key
+sudo cp /etc/letsencrypt/live/$misphostname/cert.pem /etc/ssl/private/misp.local.crt
 
 sudo systemctl restart apache2
 sudo systemctl enable apache2
