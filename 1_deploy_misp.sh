@@ -9,7 +9,7 @@ sudo apt-get install certbot python-certbot-apache -y
 sudo apt install python3-pip -y
 sudo apt-get install mysql-client  -y
 
-curl -fsSL https://raw.githubusercontent.com/MISP/MISP/2.4/INSTALL/INSTALL.sh | bash -s -- -c -A
+curl -fsSL https://raw.githubusercontent.com/MISP/MISP/2.4/INSTALL/INSTALL.sh | bash -s -- -A
 
 sudo ufw allow 80/tcp
 sudo ufw allow 443/tcp
@@ -17,7 +17,7 @@ sudo ufw allow 443/tcp
 sudo systemctl stop apache2
 
 read -p "Enter the hostname for this MISP instance: " misphostname
-sudo certbot certonly -d '$staticip' --server https://acme-v02.api.letsencrypt.org/directory
+sudo certbot certonly -d $misphostname --server https://acme-v02.api.letsencrypt.org/directory
 
 sudo cp /etc/ssl/private/misp.local.crt old.misp.local.crt
 sudo cp /etc/ssl/private/misp.local.key old.misp.local.key
