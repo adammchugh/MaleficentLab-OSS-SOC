@@ -16,6 +16,8 @@ sleep 10
 
 sudo cqlsh localhost 9042 -e "UPDATE system.local SET cluster_name = 'thp' where key='local';"
 
+sleep 10
+
 sudo nodetool flush
 
 curl https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY | sudo apt-key add -
