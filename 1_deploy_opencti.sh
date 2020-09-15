@@ -1,13 +1,23 @@
 #!/bin/bash
-sudo apt-get install nodejs npm python3 python3-pip
-mkdir /opt/opencti && cd /opt/opencti
-wget https://github.com/OpenCTI-Platform/opencti/releases/download/{RELEASE_VERSION}/opencti-release.tar.gz
-tar xvfz opencti-release.tar.gz
-cd opencti 
-cp config/default.json config/production.json
+sudo apt-get update
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+    
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo apt-key fingerprint 0EBFCD88
 
-wget https://github.com/OpenCTI-Platform/connectors/archive/{RELEASE_VERSION}.zip 
-unzip {RELEASE_VERSION}.zip 
-cd connectors-{RELEASE_VERSION}/misp/ 
-pip3 install -r requirements.txt 
-cp config.yml.sample config.yml
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+   
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose
+
+sudo docker swarm init
+sudo mkdir -p /opt/portainer && cd /opt/portainer
+curl -L https://downloads.portainer.io/portainer-agent-stack.yml -o portainer-agent-stack.yml
