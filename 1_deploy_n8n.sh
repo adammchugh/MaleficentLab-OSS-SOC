@@ -103,4 +103,4 @@ GENERIC_TIMEZONE=UTC/GMT
 SSL_EMAIL=user@example.com
 EOF
 
-sudo docker-compose up -d
+# sudo docker-compose up -d
