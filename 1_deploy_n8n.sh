@@ -16,8 +16,8 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 sudo mkdir -p /opt/n8n_files
 sudo mkdir -p /opt/n8n
-sudo chmod -R ${USER}:${USER} /opt/n8n_files
-sudo chmod -R ${USER}:${USER} /opt/n8n
+sudo chown -R ${USER}:${USER} /opt/n8n_files
+sudo chown -R ${USER}:${USER} /opt/n8n
 
 sudo cat << EOF > ./docker-compose.yml
 version: "3"
