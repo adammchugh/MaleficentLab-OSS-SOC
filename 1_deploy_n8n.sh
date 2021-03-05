@@ -19,7 +19,7 @@ sudo mkdir -p /opt/n8n
 sudo chown -R ${USER}:${USER} /opt/n8n_files
 sudo chown -R ${USER}:${USER} /opt/n8n
 
-sudo cat << EOF > ./docker-compose.yml
+sudo cat << EOF > docker-compose.yml
 version: "3"
 
 services:
@@ -75,7 +75,7 @@ services:
       - /opt/n8n_files:/files
 EOF
 
-sudo cat << EOF > ./.env
+sudo cat << EOF > .env
 # Folder where data should be saved
 DATA_FOLDER=/opt/n8n/
 
