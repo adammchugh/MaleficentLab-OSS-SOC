@@ -41,9 +41,9 @@ PASSWORD_SERVICE=$(openssl rand -base64 12)
 sed -i "s/password_789/$PASSWORD_SERVICE/g" ./.env
 
 PASSWORD_INITIAL=$(openssl rand -base64 12)
-sed -i "s/assemblyline.local/$fqdn_string/g" ./.env
-
 sed -i "s/PASSWORD = 'admin'/PASSWORD = '$PASSWORD_INITIAL'/g" ./config/bootstrap.py
+
+sed -i "s/assemblyline.local/$fqdn_string/g" ./.env
 
 echo "FILESTORE PASSWORD: ${PASSWORD_FILESTORE} \n"
 echo "ELASTIC PASSWORD: ${PASSWORD_ELASTIC} \n"
