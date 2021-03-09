@@ -29,10 +29,7 @@ git clone https://github.com/CybercentreCanada/assemblyline-docker-compose.git
 
 cd assemblyline-docker-compose/full_appliance
 
-# openssl req -nodes -x509 -newkey rsa:4096 -keyout ./config/nginx.key -out ./config/nginx.crt -days 365 -subj "/C=CA/ST=Ontario/L=Ottawa/O=CCCS/CN=assemblyline.local"
-sudo certbot certonly --standalone --preferred-challenges http -d $fqdn_string
-sudo cp /etc/letsencrypt/live/$fqdn_string/privkey.pem ./config/nginx.crt
-sudo cp /etc/letsencrypt/live/$fqdn_string/cert.pem ./config/nginx.key
+openssl req -nodes -x509 -newkey rsa:4096 -keyout ./config/nginx.key -out ./config/nginx.crt -days 365 -subj "/C=CA/ST=Ontario/L=Ottawa/O=CCCS/CN=$fqdn_string"
 
 echo "Set passwords and paths in ./.env and ./config/bootstrap.py"
 
