@@ -31,7 +31,23 @@ cd assemblyline-docker-compose/full_appliance
 
 openssl req -nodes -x509 -newkey rsa:4096 -keyout ./config/nginx.key -out ./config/nginx.crt -days 365 -subj "/C=CA/ST=Ontario/L=Ottawa/O=CCCS/CN=$fqdn_string"
 
-echo "Set passwords and paths in ./.env and ./config/bootstrap.py"
+PASSWORD_FILESTORE=$(openssl rand -base64 12)
+PASSWORD_ELASTIC=$(openssl rand -base64 12)
+PASSWORD_SERVICE=$(openssl rand -base64 12)
+PASSWORD_INITIAL=$(openssl rand -base64 12)
+
+sed -i "s/password_123/$PASSWORD_FILESTORE/g" ./.env
+sed -i "s/password_456/$PASSWORD_ELASTIC/g" ./.env
+sed -i "s/password_789/$PASSWORD_SERVICE/g" ./.env
+sed -i "s/assemblyline.local/$fqdn_string/g" ./.env
+
+sed -i "s/PASSWORD = 'admin'/PASSWORD = '$PASSWORD_INITIAL'/g" ./config/bootstrap.py
+
+echo "FILESTORE PASSWORD: ${PASSWORD_FILESTORE} \n"
+echo "ELASTIC PASSWORD: ${PASSWORD_ELASTIC} \n"
+echo "SERVICE PASSWORD: ${PASSWORD_SERVICE} \n"
+echo "INITIAL PASSWORD: ${PASSWORD_INITIAL} \n"
+echo "SERVICE HOSTNAME: ${fqdn_string} \n"
 
 echo "sudo docker-compose pull"
 echo "sudo docker-compose up -d"
