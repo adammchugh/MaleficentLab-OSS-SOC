@@ -11,7 +11,7 @@ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubun
 
 sudo add-apt-repository ppa:certbot/certbot -y
 sudo apt-get update -y
-sudo apt-get install certbot python-certbot-apache -y
+sudo apt-get install certbot -y
 
 # Install Docker
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
