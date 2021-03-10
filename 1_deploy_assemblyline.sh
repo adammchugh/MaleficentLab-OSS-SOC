@@ -51,6 +51,12 @@ echo "SERVICE PASSWORD: ${PASSWORD_SERVICE} \n"
 echo "INITIAL PASSWORD: ${PASSWORD_INITIAL} \n"
 echo "SERVICE HOSTNAME: ${fqdn_string} \n"
 
+echo "FILESTORE PASSWORD: ${PASSWORD_FILESTORE} \n" >> ./.credentials.txt
+echo "ELASTIC PASSWORD: ${PASSWORD_ELASTIC} \n" >> ./.credentials.txt
+echo "SERVICE PASSWORD: ${PASSWORD_SERVICE} \n" >> ./.credentials.txt
+echo "INITIAL PASSWORD: ${PASSWORD_INITIAL} \n" >> ./.credentials.txt
+echo "SERVICE HOSTNAME: ${fqdn_string} \n" >> ./.credentials.txt
+
 echo "sudo docker-compose pull"
 echo "sudo docker-compose up -d"
 
