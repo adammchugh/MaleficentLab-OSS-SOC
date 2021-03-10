@@ -25,8 +25,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 # Test docker-compose installation
 docker-compose --version
 
-# git clone https://github.com/CybercentreCanada/assemblyline-docker-compose.git
-git clone -b b4970d7262 https://github.com/CybercentreCanada/assemblyline-docker-compose.git
+git clone https://github.com/CybercentreCanada/assemblyline-docker-compose.git
 
 cd assemblyline-docker-compose/full_appliance
 
